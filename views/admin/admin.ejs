@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
+    crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--bootstrap icons-->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/css/w3.css">
+   <style>
+   	body{
+   		  background-image: url('/img/bg2.jpeg');
+   	}
+   	
+.mytext {
+    background: linear-gradient(to right, red,  blue);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+.ges{
+  text-align: center;
+  margin: 0 auto;
+}
+.head-text{
+	color: white;
+}
+.link{
+	color: royalblue;
+}
+.grey{
+  color: gray;
+}
+ul{
+	list-style: none;
+}
+   </style>
+	<title>Admin</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top bg-dark  "  data-bs-theme="dark" >
+        <div class="container-fluid">
+          <a class="navbar-brand head-text" href="/admin/home">POS v1.1</a>
+           <header class="  text-center  mytext ges "><h1>BENTECH POS - ADMIN</h1></header>
+
+           <div class="row">
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <a href="/pos" class="btn btn-primary ">POS</a>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-1 ">
+                    <div >
+                        <form method="POST" action="/api/user/logout">
+                        <button class="btn btn btn-danger" type="submit">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+
+
+
+ <main role="main" class="container">
+      <div >
+
+
+	<div class="row mt-5 ">
+
+		<div class="col-lg-3 mt-5 ">
+			<div class="w3-sidebar w3-bar-block w3-margin-top w3-margin-right bg-dark" style="width:15%;left:0;">
+				<h5 class="w3-bar-item grey ">Menu</h5>
+
+				<ul>
+					<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle head-text" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Products
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Add products</a></li>
+          </ul>
+        </li>
+					<li><a type="button" class=" w3-bar-item w3-button head-text" href="/admin/home/categories">Categories</a></li>
+					<li><a type="button" class=" w3-bar-item w3-button head-text" href="/admin/home/users">Users</a></li>
+					<li><a type="button" class=" w3-bar-item w3-button head-text" href="/admin/home/sales">Sales</a></li>
+				</ul>
+				<div class="card bg-dark">
+                    <div class="card-body">
+						<h2 class="grey">Totals</h2>
+                        <div class="head-text"><h4>Stock Value:</h4> <span id="stock-value"></span></div>
+						<div class="head-text"><h4>Stock Profit:</h4> <span id="total-profit"></span></div>
+
+                    </div>
+                </div>
+			</div>
+		</div>
+	
+
+	<div class="col-lg-2 ">
+		
+					<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Add products</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form method="POST" action="/api/products/add-products">
+							<div id="message" class="error-message"></div>
+							<div class="form-group">
+								<label for="category">Category</label><br>
+								<select name="category_id" required>
+									<option value="">Select a category</option>
+								</select><br>
+
+								<label for="product_name">Product Name</label><br>
+								<input type="text" name="product_name" placeholder="product_name" required><br>
+
+								<label for="product_name">Product Brand</label><br>
+								<input type="text" name="brand" placeholder="brand" required><br>
+
+                <label for="quantity">Buying Price</label><br>
+								<input type="number" name="product_buyingprice" placeholder="product_buyingprice" required><br>
+
+								<label for="product_price">Selling Price</label><br>
+								<input type="number" name="product_price" placeholder="product_price" required><br>
+
+								<label for="quantity">Quantity</label><br>
+								<input type="number" name="quantity" placeholder="quantity" required><br>
+
+								<label for="quantity">Barcode</label><br>
+								<input type="number" name="barcode" placeholder="barcode" required><br>
+
+								
+
+								
+							</div>
+							<button class="btn btn-primary mt-3" type="submit">Add Product</button>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</div>
+</main>
+
+
+
+<div class="container mt-3" >
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-10">
+
+			<div class="card bg-dark">
+   
+			<div class="card-body">
+				<div class="table-responsive">
+				            
+                    <table class="table student-data-table m-t-20 table-dark">
+                        <thead>
+                          <tr>
+                            <th>BARCODE</th>
+              							<th>NAME</th>
+              							<th>BRAND</th>
+              							<th>BUYING PRICE</th>
+              							<th>SELLING PRICE</th>
+              							<th>QUANTITY</th>
+              							<th>PROFIT</th>
+              							<th>ACTION</th>
+                          </tr>
+                        </thead>
+                        <tbody id="products-data">
+                          <!-- This is where the sales data will be dynamically populated -->
+                        </tbody>
+                      </table>
+				
+
+
+
+
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+	<script>
+		//get categories
+		    $(function() {
+        $.get('/api/categories/get-all-categories', function(categories) {
+            // populate the category drop-down list with the retrieved categories
+            var categorySelect = $('select[name="category_id"]');
+            categories.forEach(function(category) {
+                categorySelect.append($('<option>').attr('value', category.id).text(category.name));
+            });
+        });
+    });
+
+
+
+
+    //add users function
+    const form = document.getElementById('register-form');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()));
+      const response = await fetch('/api/user/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: formDataJson
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        message.textContent = result.message;
+        form.reset();
+      } else {
+        message.textContent = result.error;
+      }
+    });
+
+
+
+
+ //delete products
+
+function delete_data(id) {
+	  if (confirm("Are you sure you want to delete this product?")) {
+	    const params = { id: id };
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('DELETE', `/delete/${id}`, true);
+	    xhr.setRequestHeader('Content-Type', 'application/json');
+	    xhr.onreadystatechange = () => {
+	      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	        alert('Product deleted successfully!');
+	        load_data();
+	      }
+	    };
+	    xhr.send(JSON.stringify(params));
+	  }
+	}
+
+
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+
+
+<script>
+
+
+
+
+//storename
+  $(document).ready(function() {
+  $.ajax({
+    url: '/admin/store_name',
+    type: 'GET',
+    success: function(response) {
+      $('#store-name-header').text(response.store_Name);
+    },
+    error: function(xhr, status, error) {
+      console.error('Error retrieving store name:', error);
+    }
+  });
+});
+
+
+
+
+$(document).ready(function() {
+  // Initialize the date picker
+  flatpickr("#start-date", {
+    dateFormat: "Y-m-d"
+  });
+  flatpickr("#end-date", {
+    dateFormat: "Y-m-d"
+  });
+
+  // Fetch sales data from the server
+  function fetchProductsData(startDate, endDate) {
+    $.ajax({
+      url: '/api/products/products', // Replace with the URL of your server endpoint that returns the sales data as JSON
+      type: 'GET',
+      data: {
+        start_date: startDate,
+        end_date: endDate
+      },
+      success: function(products) {
+        // Populate the sales table
+        var productsTable = '';
+        var totalProfit = 0;
+        var stockValue = 0;
+        products.forEach(function(product) {
+          productsTable += '<tr>';
+          productsTable += '<td>' + product.barcode+ '</td>';
+          productsTable += '<td><button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editModal' + product.product_id + '">' + product.product_name + '</button></td>';
+          //productsTable += '<td>' + product.product_name + '</td>';
+          productsTable += '<td>' + product.brand + '</td>';
+          productsTable += '<td>KES' + product.product_buyingprice + '</td>';
+          productsTable += '<td>KES' + product.product_price + '</td>';
+          productsTable += '<td>' + product.quantity + '</td>';
+          productsTable += '<td>' + product.profit + '</td>';
+		      productsTable += '<td><a  href="/delete/' + product.product_id + '"><img src="/img/del.png"></a></td>';
+          productsTable += '</tr>';
+
+
+            // Add the edit modal for this product
+  var editModal = '<div class="modal fade" id="editModal' + product.product_id + '" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">';
+  editModal += '<div class="modal-dialog">';
+  editModal += '<div class="modal-content">';
+  editModal += '<div class="modal-header">';
+  editModal += '<h5 class="modal-title" id="editModalLabel">Edit Product</h5>';
+  editModal += '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+  editModal += '</div>';
+  editModal += '<div class="modal-body">';
+  editModal += '<form action="/api/products/' + product.product_id + '" method="POST">';
+  editModal += '<div   id="message" class="error-message"></div>';
+  editModal += '<div class="form-group">';
+
+  editModal += '<label for="barcode">Barcode </label>';
+  editModal += '<input type="number" class="form-control" id="barcode" name="barcode" value="' + product.barcode + '">';
+
+  editModal += '<label for="product_name">Product Name</label>';
+  editModal += '<input type="text" class="form-control" id="product_name" name="product_name" value="' + product.product_name + '">';
+
+  editModal += '<label for="brand">Brand</label>';
+  editModal += '<input type="text" class="form-control" id="brand" name="brand" value="' + product.brand + '">';
+
+  editModal += '<label for="quantity">Quantity</label>';
+  editModal += '<input type="number" class="form-control" id="quantity" name="quantity" value="' + product.quantity + '">';
+
+  editModal += '<label for="product_price">Selling Price</label>';
+  editModal += '<input type="number" class="form-control" id="product_price" name="product_price" value="' + product.product_price + '">';
+
+  editModal += '<label for="product_buyingprice">Buying Price</label>';
+  editModal += '<input type="number" class="form-control" id="product_buyingprice" name="product_buyingprice" value="' + product.product_buyingprice + '">';
+  editModal += '</div>';
+  editModal += '<button type="submit" class="btn btn-primary mt-3">Save </button>';
+  editModal += '</form>';
+  editModal += '</div>';
+  editModal += '</div>';
+  editModal += '</div>';
+  editModal += '</div>';
+
+  // Append the edit modal to the page
+  $('body').append(editModal);
+
+          // Add the profit value to the total profit
+		      totalProfit += product.profit;
+
+          // Add the buying price value to the stock value
+          stockValue += product.product_buyingprice;
+        });
+
+        // Append the sales data to the sales table
+        $('#products-data').html(productsTable);
+
+        // Display the total sales value
+        $('#total-profit').text('KES ' + totalProfit);
+		//show stock value
+        $('#stock-value').text('KES ' + stockValue);
+      }
+    });
+  }
+   
+  // Fetch all sales data initially
+  fetchProductsData(null, null);
+
+
+});
+</script>
+     
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
